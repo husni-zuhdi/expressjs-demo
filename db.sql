@@ -1,6 +1,6 @@
 CREATE DATABASE expressjs_demo_db;
 
-CREATE  TABLE IF NOT EXISTS `user` (
+CREATE  TABLE IF NOT EXISTS `users` (
   `id` BIGINT UNSIGNED AUTO_INCREMENT,
   `first_name` VARCHAR(255) NOT NULL,
   `last_name` VARCHAR(255) NOT NULL,
