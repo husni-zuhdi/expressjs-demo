@@ -15,8 +15,12 @@ app.use(bodyParser.json())
 
 // define a root route
 app.get('/', (req, res) => {
-    res.send("Hello World");
+    res.send("Hello all 👋. This is demo for CC-25");
 });
+
+// Import userRoutes and using it as middleware
+const userRoutes = require("./src/routes/user.routes");
+app.use("/api/v1/users", userRoutes)
 
 // listen for requests
 app.listen(port, () => {
