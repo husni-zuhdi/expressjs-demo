@@ -1,21 +1,21 @@
 const express = require("express")
 const router = express.Router()
 
-const userController = require("../controllers/user.controller");
+const employeeController = require("../controllers/employee.controller");
 
-// Get all users
-router.get("/", userController.getAll);
+// Get all employees
+router.get("/", employeeController.getAll);
 
-// Create new user
-router.post("/", userController.create);
+// Create new employee
+router.post("/", employeeController.create);
 
-// Get user by Id
-router.get("/:id", userController.getById);
+// Get employee by Id
+router.get("/:id", employeeController.getById);
 
-// Update user data
-router.put(":/id", userController.update);
+// Update employee data
+router.put(":/id", employeeController.update);
 
-// Delete user data
-router.delete("/:id", userController.delete);
+// Delete employee data
+router.delete("/:id", employeeController.delete);
 
 module.exports = router

@@ -1,6 +1,6 @@
 CREATE DATABASE expressjs_demo_db;
 
-CREATE  TABLE IF NOT EXISTS `users` (
+CREATE  TABLE IF NOT EXISTS `employees` (
   `id` BIGINT UNSIGNED AUTO_INCREMENT,
   `first_name` VARCHAR(255) NOT NULL,
   `last_name` VARCHAR(255) NOT NULL,
@@ -14,4 +14,5 @@ CREATE  TABLE IF NOT EXISTS `users` (
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)) ENGINE = InnoDB;
-INSERT INTO `expressjs_demo_db`.`user` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('John', 'Doe', 'johndoe@gmail.com', '1234567890', 'BR Softech Pvt Ltd', 'Full Stack Developer', '500.00', '1', '0', '2019-11-19 03:30:30');
+INSERT INTO `expressjs_demo_db`.`employee` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('John', 'Doe', 'johndoe@gmail.com', '1234567890', 'BR Softech Pvt Ltd', 'Full Stack Developer', '500.00', '1', '0', '2019-11-19 03:30:30');
+INSERT INTO `expressjs_demo_db`.`employee` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('Husni', 'Zuhdi', 'husnizuhdi@gmail.com', '0987654321', 'PT Random Sejati', 'Cloud Engineer', '500.00', '1', '0', '2019-11-19 03:30:30');

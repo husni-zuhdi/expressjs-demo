@@ -1,29 +1,29 @@
 'use strict';
 
 const { createQuery } = require('mysql/lib/Connection');
-var dbConnection = require('./../../config/db.config');
+var dbConnection = require('../../config/db.config');
 
-//Create object user
-var User = function(user) {
-    this.first_name = user.first_name;
-    this.last_name = user.last_name;
-    this.email = user.email;
-    this.phone = user.phone;
-    this.organization = user.organization;
-    this.designation = user.designation;
-    this.salary = user.salary;
-    this.status = user.status;
+//Create object employee
+var Employee = function(employee) {
+    this.first_name = employee.first_name;
+    this.last_name = employee.last_name;
+    this.email = employee.email;
+    this.phone = employee.phone;
+    this.organization = employee.organization;
+    this.designation = employee.designation;
+    this.salary = employee.salary;
+    this.status = employee.status;
     this.created_at = new Date();
     this.updated_at = new Date();
 };
 
-// Create User
-User.create = function(newUser, result) {
+// Create Employee
+Employee.create = function(newEmployee, result) {
     // query for create
-    createQuery = "INSERT INTO users SET ?"
+    createQuery = "INSERT INTO employees SET ?"
     
     // Do the query
-    dbConnection.query(createQuery, newUser, function(err, res) {
+    dbConnection.query(createQuery, newEmployee, function(err, res) {
         // If error, show it
         if(err) {
             console.log("error", err);
@@ -36,10 +36,10 @@ User.create = function(newUser, result) {
     });
 };
 
-// Get User by Id
-User.getById = function(id, result) {
+// Get Employee by Id
+Employee.getById = function(id, result) {
     // query for get
-    getQuery = "SELECT * FROM users WHERE id = ? "
+    getQuery = "SELECT * FROM employees WHERE id = ? "
 
     // Do the query
     dbConnection.query(getQuery, id, function(err, res) {
@@ -49,15 +49,15 @@ User.getById = function(id, result) {
             result(err, null);
         }
 
-        // If not, serve the user data
+        // If not, serve the employee data
         result(null, res);
     });
 };
 
-// Get All User
-User.getAll = function(result) {
+// Get All Employee
+Employee.getAll = function(result) {
     // query for get all
-    getAllQuery = "SELECT * FROM users"
+    getAllQuery = "SELECT * FROM employees"
 
     // Do the query
     dbConnection.query(getAllQuery, function(err, res) {
@@ -67,17 +67,17 @@ User.getAll = function(result) {
             result(err, null);
         }
 
-        // If not, serve the user data
-        console.log("users", res)
+        // If not, serve the employee data
+        console.log("employees", res)
         result(null, res);
     });
 };
 
-// Update User
-User.update = function(id, user, result) {
+// Update Employee
+Employee.update = function(id, employee, result) {
     // query for update
     updateQuery = `
-    UPDATE users SET
+    UPDATE employees SET
         first_name=?,
         last_name=?,
         email=?,
@@ -88,35 +88,35 @@ User.update = function(id, user, result) {
     WHERE id = ?
     `
 
-    // User data to be updated
-    userData = [
-        user.first_name,
-        user.last_name,
-        user.email,
-        user.phone,
-        user.organization,
-        user.designation,
-        user.salary,
+    // Employee data to be updated
+    employeeData = [
+        employee.first_name,
+        employee.last_name,
+        employee.email,
+        employee.phone,
+        employee.organization,
+        employee.designation,
+        employee.salary,
         id
     ]
 
     // Do the query
-    dbConnection.query(updateQuery, userData, function (err, res) {
+    dbConnection.query(updateQuery, employeeData, function (err, res) {
         // If error, show it
         if (err) {
             console.log("error", err);
             result(err, null);
         }
 
-        // If not, update user data
+        // If not, update employee data
         result(null, res);
     });
 };
 
-// Delete User
-User.delete = function(id, result) {
+// Delete Employee
+Employee.delete = function(id, result) {
     // query for delete
-    deleteQuery = "DELETE FROM users WHERE id = ?"
+    deleteQuery = "DELETE FROM employees WHERE id = ?"
 
     // Do the query
     dbConnection.query(deleteQuery, id, function (err, res) {
@@ -126,9 +126,9 @@ User.delete = function(id, result) {
             result(err, null);
         }
 
-        // If not, show deleted user
+        // If not, show deleted employee
         result(null, res);
     });
 };
 
-module.exports = User;
+module.exports = Employee;

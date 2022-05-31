@@ -1,25 +1,25 @@
 'use strict';
 
-const User = require("../models/user.model");
+const Employee = require("../models/employee.model");
 
-// Handle get all users
+// Handle get all employees
 exports.getAll = function(req, res) {
-    User.getAll(function(err, users) {
+    Employee.getAll(function(err, employees) {
         console.log("controller");
 
         if(err) {
             res.send(err);
         }
 
-        console.log("res", users);
-        res.send(users)
+        console.log("res", employees);
+        res.send(employees)
     });
 };
 
-// Handle create user
+// Handle create employee
 exports.create = function(req, res) {
-    // News user data
-    const newUser = new User(req.body);
+    // News employee data
+    const newEmployee = new Employee(req.body);
 
     // Handle null error
     if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
@@ -29,31 +29,31 @@ exports.create = function(req, res) {
         });
     };
     // If everything is okay
-    User.create(newUser, function(err, user) {
+    Employee.create(newEmployee, function(err, employee) {
         if(err) {
             res.send(err);
         }
 
         res.json({
             error: false,
-            message: "✅User added into our database",
-            data: user
+            message: "✅Employee added into our database",
+            data: employee
         });
     });
 };
 
-// Handle get user by id
+// Handle get employee by id
 exports.getById = function(req, res) {
-    User.getById(req.params.id, function(err, user) {
+    Employee.getById(req.params.id, function(err, employee) {
         if(err) {
             res.send(err);
         }
 
-        res.json(user);
+        res.json(employee);
     });
 };
 
-// Handle update user
+// Handle update employee
 exports.update = function(req, res) {
     // Handle null error
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
@@ -62,27 +62,27 @@ exports.update = function(req, res) {
             message: "⛔Please provide all required data!"
         });
     };
-    User.update(req.params.id, new User(req.body), function(err, user) {
+    Employee.update(req.params.id, new Employee(req.body), function(err, employee) {
         if (err) {
             res.send(err);
         }
 
         res.json({
             error: false,
-            message: "👍User is updated!"
+            message: "👍Employee is updated!"
         });
     });
 };
 
 exports.delete = function(req, res) {
-    User.delete(req.params.id, function(err, res) {
+    Employee.delete(req.params.id, function(err, res) {
         if (err) {
             res.send(err);
         }
 
         res.json({
             error: false,
-            message: "❎User is deleted!"
+            message: "❎Employee is deleted!"
         });
     });
 };
