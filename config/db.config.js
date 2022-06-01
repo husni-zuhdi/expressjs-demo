@@ -1,12 +1,12 @@
 'use strict';
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // database configuration
 const config = {
     host: 'localhost',
     user: 'root',
-    password: 'password',
+    password: 'pas$w0rd',
     database: 'expressjs_demo_db'
 }
 
