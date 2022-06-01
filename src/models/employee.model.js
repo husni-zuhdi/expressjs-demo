@@ -3,7 +3,7 @@
 const { createQuery } = require('mysql/lib/Connection');
 var dbConnection = require('../../config/db.config');
 
-//Create object employee
+//Create object/schema(?) employee
 var Employee = function(employee) {
     this.first_name = employee.first_name;
     this.last_name = employee.last_name;
