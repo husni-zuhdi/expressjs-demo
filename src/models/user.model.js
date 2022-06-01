@@ -1,6 +1,5 @@
 'use strict';
 
-const { createQuery } = require("mysql/lib/Connection");
 var dbConnection = require("../../config/db.config");
 
 //Create object/schema(?) user
@@ -14,7 +13,7 @@ var User = function (user) {
 
 User.register = function(newUser, result) {
     // query for register user
-    registerQuery = "INSERT INTO users SET ?"
+    const registerQuery = "INSERT INTO users SET ?"
     
     // Do the query
     dbConnection.query(createQuery, newUser, function (err, res) {
@@ -37,7 +36,7 @@ User.login = function(User, result) {
 // Get user by email
 User.check = function (email, result) {
     // query for get
-    getQuery = "SELECT * FROM user WHERE email = ? "
+    const getQuery = "SELECT * FROM users WHERE email = ? "
 
     // Do the query
     dbConnection.query(getQuery, email, function (err, res) {

@@ -1,6 +1,5 @@
 'use strict';
 
-const { createQuery } = require('mysql/lib/Connection');
 var dbConnection = require('../../config/db.config');
 
 //Create object/schema(?) employee
@@ -20,7 +19,7 @@ var Employee = function(employee) {
 // Create Employee
 Employee.create = function(newEmployee, result) {
     // query for create
-    createQuery = "INSERT INTO employees SET ?"
+    const createQuery = "INSERT INTO employees SET ?"
     
     // Do the query
     dbConnection.query(createQuery, newEmployee, function(err, res) {
@@ -39,7 +38,7 @@ Employee.create = function(newEmployee, result) {
 // Get Employee by Id
 Employee.getById = function(id, result) {
     // query for get
-    getQuery = "SELECT * FROM employees WHERE id = ? "
+    const getQuery = "SELECT * FROM employees WHERE id = ? "
 
     // Do the query
     dbConnection.query(getQuery, id, function(err, res) {
@@ -57,7 +56,7 @@ Employee.getById = function(id, result) {
 // Get All Employee
 Employee.getAll = function(result) {
     // query for get all
-    getAllQuery = "SELECT * FROM employees"
+    const getAllQuery = "SELECT * FROM employees"
 
     // Do the query
     dbConnection.query(getAllQuery, function(err, res) {
@@ -76,7 +75,7 @@ Employee.getAll = function(result) {
 // Update Employee
 Employee.update = function(id, employee, result) {
     // query for update
-    updateQuery = `
+    const updateQuery = `
     UPDATE employees SET
         first_name=?,
         last_name=?,
@@ -89,7 +88,7 @@ Employee.update = function(id, employee, result) {
     `
 
     // Employee data to be updated
-    employeeData = [
+    const employeeData = [
         employee.first_name,
         employee.last_name,
         employee.email,
@@ -116,7 +115,7 @@ Employee.update = function(id, employee, result) {
 // Delete Employee
 Employee.delete = function(id, result) {
     // query for delete
-    deleteQuery = "DELETE FROM employees WHERE id = ?"
+    const deleteQuery = "DELETE FROM employees WHERE id = ?"
 
     // Do the query
     dbConnection.query(deleteQuery, id, function (err, res) {
