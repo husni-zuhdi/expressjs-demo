@@ -23,7 +23,7 @@ exports.create = function(req, res) {
 
     // Handle null error
     if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
-        res.status(400).send({
+        res.status(400).json({
             error: true,
             message: "⛔Please provide all required data!"
         });

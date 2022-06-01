@@ -18,16 +18,18 @@ exports.register = async (req, res) => {
     };
 
     // Check if user is already registered in our service
-    const checkUser = User.check(req.body);
-
-    if(checkUser) {
-        res.status(409).send("🙇‍♂️User Already Exist. Please Login");
-    }
+    User.check(req.body, function(err, user) {
+        if(!user) {
+            console.log("err and user", err, user)
+            res.status(409).send({
+                error: true,
+                message: "🙇‍♂️User Already Exist. Please Login"
+            });
+        }
+    });
 
     // Encrypt the password
     const encryptPass = await bcrypt.hash(password, 10);
-    // console.log(encryptPass);
-
 
     const newUser = new User({
         first_name: first_name,
@@ -54,7 +56,7 @@ exports.register = async (req, res) => {
         // Assign token to user
         user.token = token;
 
-        res.json({
+        res.status(201).send({
             error: false,
             message: "🎉Congrats you are registered",
             token: user.token
@@ -76,9 +78,17 @@ exports.login = async (req, res) => {
     };
 
     // Check if user is already registered in our service
-    const user = User.check(req.body);
+    User.check(req.body, function (user) {
+        console.log(user)
+        if (!user) {
+            res.status(409).send({
+                error: true,
+                message: "🙇‍♂️User Haven't Registered. Please Register"
+            });
+        }
+    });
 
-    if(user && (await bcrypt.compare(password, user.password))) {
+    if(await bcrypt.compare(password, user.password)) {
         // Create token
         const token = jwt.sign({
             user_id: user.data.id,

@@ -49,6 +49,7 @@ Employee.getById = function(id, result) {
         }
 
         // If not, serve the employee data
+        console.log("employee", res);
         result(null, res);
     });
 };
