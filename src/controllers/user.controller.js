@@ -59,4 +59,4 @@ exports.register = function(req, res) {
     user.data.token = token;
 
     res.status(201).json(user);
-}
+};
