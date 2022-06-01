@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+// Test auth
+const auth = require('./src/middleware/auth') 
 
 // create express app
 const app = express();
@@ -12,7 +14,12 @@ app.use(bodyParser.json())
 
 // define a root route
 app.get('/', (req, res) => {
-    res.send("Hello all 👋. This is demo for CC-25");
+    res.status(200).send("Hello all 👋. This is demo for CC-25");
+});
+
+// Test auth
+app.get('/welcome', auth, (req, res) => {
+    res.status(200).send("Hello all 👋. This is demo for CC-25");
 });
 
 // Import employeeRoutes and using it as middleware
