@@ -16,7 +16,7 @@ User.register = function(newUser, result) {
     const registerQuery = "INSERT INTO users SET ?"
     
     // Do the query
-    dbConnection.query(createQuery, newUser, function (err, res) {
+    dbConnection.query(registerQuery, newUser, function (err, res) {
         // If error, show it
         if (err) {
             console.log("error", err);
@@ -29,7 +29,7 @@ User.register = function(newUser, result) {
     });
 }
 
-User.login = function(User, result) {
+User.login = function(user, result) {
     // Code Here
 }
 

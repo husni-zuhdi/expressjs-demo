@@ -60,3 +60,36 @@ exports.register = function(req, res) {
 
     res.status(201).json(user);
 };
+
+// Handle Login
+exports.login = function(req, res) {
+    // Get Login data
+    const  { email, password } = req.body;
+
+    // Check email and password is in login data
+    if(!(email && password)) {
+        res.status(400).send({
+            error: true,
+            message: "⛔Please provide all required data!"
+        });
+    };
+
+    // Check if user is already registered in our service
+    const user = User.check(email);
+
+    if(user && (await bcrypt.compare(password, user.password))) {
+        // Create token
+        const token = jwt.sign({
+            user_id: user.data.id,
+            email
+        }, process.env.TOKEN_KEY, {
+            expiresIn: "2h",
+        }
+        );
+
+        // Assign token to user
+        user.data.token = token;
+
+        res.status(201).json(user);
+    };
+};
