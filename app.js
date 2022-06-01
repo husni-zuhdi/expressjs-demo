@@ -22,8 +22,10 @@ app.get('/welcome', auth, (req, res) => {
     res.status(200).send("Hello all 👋. The auth is works!");
 });
 
-// Import employeeRoutes and using it as middleware
+// Import employeeRoutes and userRoutes and using it as middleware
 const employeeRoutes = require("./src/routes/employee.routes");
+const userRoutes = require("./src/routes/user.routes");
 app.use("/api/v1/employees", employeeRoutes)
+app.use("/api/v1/user", userRoutes)
 
 module.exports = app;

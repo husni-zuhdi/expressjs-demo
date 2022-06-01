@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
 // Handle register
-exports.register = function(req, res) {
+exports.register = async (req, res) => {
     // Get User data
     const { first_name, last_name, email, password } = req.body;
 
@@ -18,7 +18,7 @@ exports.register = function(req, res) {
     };
 
     // Check if user is already registered in our service
-    const checkUser = User.check(email);
+    const checkUser = User.check(req.body);
 
     if(checkUser) {
         res.status(409).send("🙇‍♂️User Already Exist. Please Login");
@@ -26,43 +26,44 @@ exports.register = function(req, res) {
 
     // Encrypt the password
     const encryptPass = await bcrypt.hash(password, 10);
+    // console.log(encryptPass);
 
-    const newUser = User({
+
+    const newUser = new User({
         first_name: first_name,
         last_name: last_name,
         email: email,
         password: encryptPass,
     });
 
-    const user = User.create(newUser, function(err, user) {
+    User.create(newUser, function(err, user) {
         if (err) {
+            console.log(err)
             res.send(err);
         }
 
-        console.log({
+        // Create token
+        const token = jwt.sign({
+            user_id: user.insertId,
+            email
+        },process.env.TOKEN_KEY,{
+        expiresIn: "2h",
+        }
+        );
+
+        // Assign token to user
+        user.token = token;
+
+        res.json({
             error: false,
             message: "🎉Congrats you are registered",
-            data: user
+            token: user.token
         });
     });
-
-    // Create token
-    const token = jwt.sign({
-        user_id: user.data.id,
-        email
-    },process.env.TOKEN_KEY,{
-      expiresIn: "2h",
-    }
-    );
-
-    // Assign token to user
-    user.data.token = token;
-
-    res.status(201).json(user);
 };
 
 // Handle Login
-exports.login = function(req, res) {
+exports.login = async (req, res) => {
     // Get Login data
     const  { email, password } = req.body;
 
@@ -75,7 +76,7 @@ exports.login = function(req, res) {
     };
 
     // Check if user is already registered in our service
-    const user = User.check(email);
+    const user = User.check(req.body);
 
     if(user && (await bcrypt.compare(password, user.password))) {
         // Create token

@@ -3,7 +3,7 @@
 var dbConnection = require("../../config/db.config");
 
 //Create object/schema(?) user
-var User = function (user) {
+var User = function(user) {
     this.first_name = user.first_name;
     this.last_name = user.last_name;
     this.email = user.email;
@@ -23,27 +23,29 @@ User.create = function(newUser, result) {
         }
 
         // If not, show the insertId
-        console.log(res.insertId);
-        result(null, res.insertId);
+        // console.log(res.insertId);
+        result(null, res);
     });
 };
 
 // Get user by email
-User.check = function (email, result) {
+User.check = function (user, result) {
     // query for get
     const getQuery = "SELECT * FROM users WHERE email = ? "
+
+    // get user email
+    const email = user.email
 
     // Do the query
     dbConnection.query(getQuery, email, function (err, res) {
         // If not error, there must be a user with this email
-        // Let it pass
         if (!err) {
             console.log("error", err);
-            result(err, null);
+            // result(err, null);
         }
 
-        // If not, serve the employee data
-        result(null, true);
+        // If not, serve the user data
+        // result(null, res);
     });
 };
 
