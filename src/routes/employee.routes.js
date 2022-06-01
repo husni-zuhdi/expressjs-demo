@@ -13,7 +13,7 @@ router.post("/", employeeController.create);
 router.get("/:id", employeeController.getById);
 
 // Update employee data
-router.put(":/id", employeeController.update);
+router.put("/:id", employeeController.update);
 
 // Delete employee data
 router.delete("/:id", employeeController.delete);

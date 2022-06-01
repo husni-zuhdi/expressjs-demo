@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password`VARCHAR(255) NOT NULL,
-  `token` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`)) ENGINE = InnoDB;
-INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`, `token`) VALUES ('John', 'Doe', 'johndoe@gmail.com', 'password', 'UEjtGyDf7DtBrhIlbRjcd26c1cGuxcOsSXdGs2FZCJSMjR+9CFmrSOlbhNkCyo/bsla8MzSkaFFZhiqNuXkd8brXmFk4oI7U+63EvVt+Ev57+WaYAE8DlpIL8ia8u9KTLun0W2pXlg+Az2czDTspmmYnzSr2O628TgbToarwxPhv3H3lRaMvSV4LPh0KrAfPvTg3SX66WM96auWHzHUtJ8HkZKN5nDec+gUXFXxq/ONo7cvz');
-INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`, `token`) VALUES ('Husni', 'Zuhdi', 'husnizuhdi@gmail.com', 'pas$w0rd', 'scaaqSmcCgHpkZOsaOgzSs0DpdsWSZCXI+3kmPrX+VqTNz+iQslWaktTq1JhsT3O50K4Jw3LfjKmABDgeSSkaTWuM/lMjyVNrmcbcixJp6ZYu0TVJ5mUss0vI3Msm7jzVVxE3UDLWRK5v7inWM5VdhMl+Nct5SiENlU+GoZclFtoPPuOtQ9VLtpIiHM9WBcKuKl2FseBaB07/VmZF5W1IldOlpODLMEZbBAeGTSEoOG+8Bn1');
+INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`) VALUES ('John', 'Doe', 'johndoe@gmail.com', 'password');
+INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`) VALUES ('Husni', 'Zuhdi', 'husnizuhdi@gmail.com', 'pas$w0rd');

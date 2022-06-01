@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 // Test auth
 app.get('/welcome', auth, (req, res) => {
-    res.status(200).send("Hello all 👋. This is demo for CC-25");
+    res.status(200).send("Hello all 👋. The auth is works!");
 });
 
 // Import employeeRoutes and using it as middleware

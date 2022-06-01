@@ -8,15 +8,14 @@ var User = function (user) {
     this.last_name = user.last_name;
     this.email = user.email;
     this.password = user.password;
-    this.token = user.token;
 };
 
-User.register = function(newUser, result) {
+User.create = function(newUser, result) {
     // query for register user
-    const registerQuery = "INSERT INTO users SET ?"
+    const createQuery = "INSERT INTO users SET ?"
     
     // Do the query
-    dbConnection.query(registerQuery, newUser, function (err, res) {
+    dbConnection.query(createQuery, newUser, function (err, res) {
         // If error, show it
         if (err) {
             console.log("error", err);
@@ -27,11 +26,7 @@ User.register = function(newUser, result) {
         console.log(res.insertId);
         result(null, res.insertId);
     });
-}
-
-User.login = function(user, result) {
-    // Code Here
-}
+};
 
 // Get user by email
 User.check = function (email, result) {

@@ -34,7 +34,7 @@ exports.register = function(req, res) {
         password: encryptPass,
     });
 
-    const user = User.register(newUser, function(err, user) {
+    const user = User.create(newUser, function(err, user) {
         if (err) {
             res.send(err);
         }

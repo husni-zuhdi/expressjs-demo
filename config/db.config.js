@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 
 // database configuration
 const config = {
-    host: 'localhost',
+    host: '0.0.0.0',
     user: 'root',
     password: 'passw0rd',
     database: 'expressjs_demo_db'
