@@ -1,20 +1,41 @@
-version: '2.5'
+version: '3.5'
+
 services:
-  db:
-    image: mysql:8.0
-    cap_add:
-      - SYS_NICE
-    restart: always
+  postgres:
+    container_name: postgres_container
+    image: postgres:14-alpine
     environment:
-      - MYSQL_DATABASE=expressjs_demo_db
-      - MYSQL_ROOT_PASSWORD=passw0rd
-    ports:
-      - '3306:3306'
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
     volumes:
-      # Create database
-      - db:/var/lib/mysql
-      # Copy db.sql file into the container
-      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:6
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
 volumes:
-  db:
-    driver: local
+    postgres:
+    pgadmin:
