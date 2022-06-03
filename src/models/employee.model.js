@@ -109,7 +109,6 @@ Employee.update = function(id, employee, result) {
         }
 
         // If not, update employee data
-        console.log("res", res)
         result(null, res);
     });
 };
@@ -128,7 +127,6 @@ Employee.delete = function(id, result) {
         }
 
         // If not, show deleted employee
-        console.log("res", id)
         result(null, res);
     });
 };

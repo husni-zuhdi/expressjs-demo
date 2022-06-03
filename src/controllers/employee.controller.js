@@ -3,7 +3,7 @@
 const Employee = require("../models/employee.model");
 
 // Handle get all employees
-exports.getAll = (req, res) => {
+exports.getAll = function(req, res) {
     Employee.getAll(function(err, employees) {
         console.log("controller");
 
@@ -17,7 +17,7 @@ exports.getAll = (req, res) => {
 };
 
 // Handle create employee
-exports.create = (req, res) => {
+exports.create = function(req, res) {
     // News employee data
     const newEmployee = new Employee(req.body);
 
@@ -43,7 +43,7 @@ exports.create = (req, res) => {
 };
 
 // Handle get employee by id
-exports.getById = (req, res) => {
+exports.getById = function(req, res) {
     Employee.getById(req.params.id, function(err, employee) {
         if(err) {
             res.send(err);
@@ -54,7 +54,7 @@ exports.getById = (req, res) => {
 };
 
 // Handle update employee
-exports.update = (req, res) => {
+exports.update = function(req, res) {
     // Handle null error
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
         res.status(400).send({
@@ -74,7 +74,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.delete = function(req, res) {
     Employee.delete(req.params.id, function(err, employee) {
         if (err) {
             res.send(err);

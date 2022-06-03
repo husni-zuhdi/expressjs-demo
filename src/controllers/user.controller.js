@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
@@ -11,7 +11,7 @@ exports.register = async (req, res) => {
 
     // User input validation
     if(!(email && password && first_name && last_name)) {
-        res.status(400).json({
+        res.status(400).send({
             error: true,
             message: "⛔Please provide all required data!"
         });
@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
     User.check(req.body, function(err, user) {
         if(!user) {
             console.log("err and user", err, user)
-            res.status(409).json({
+            res.status(409).send({
                 error: true,
                 message: "🙇‍♂️User Already Exist. Please Login"
             });
@@ -56,7 +56,7 @@ exports.register = async (req, res) => {
         // Assign token to user
         user.token = token;
 
-        res.status(201).json({
+        res.status(201).send({
             error: false,
             message: "🎉Congrats you are registered",
             token: user.token
@@ -71,38 +71,36 @@ exports.login = async (req, res) => {
 
     // Check email and password is in login data
     if(!(email && password)) {
-        res.status(400).json({
+        res.status(400).send({
             error: true,
             message: "⛔Please provide all required data!"
         });
     };
 
     // Check if user is already registered in our service
-    User.check(req.body.email, async (err, user) => {
-        // console.log(user)
-        if (err) {
-            res.status(409).json({
+    User.check(req.body, function (user) {
+        console.log(user)
+        if (!user) {
+            res.status(409).send({
                 error: true,
-                message: "🙇‍♂️User Haven't Registered. Please Register.",
-                log: err
-
+                message: "🙇‍♂️User Haven't Registered. Please Register"
             });
-        };
-
-        if(bcrypt.compare(password, user.password)) {
-            // Create token
-            const token = jwt.sign({
-                user_id: user.id,
-                email
-            }, process.env.TOKEN_KEY, {
-                expiresIn: "2h",
-            }
-            );
-    
-            // Assign token to user
-            user[0].token = token;
-    
-            res.status(201).json(user);
-        };
+        }
     });
+
+    if(await bcrypt.compare(password, user.password)) {
+        // Create token
+        const token = jwt.sign({
+            user_id: user.data.id,
+            email
+        }, process.env.TOKEN_KEY, {
+            expiresIn: "2h",
+        }
+        );
+
+        // Assign token to user
+        user.data.token = token;
+
+        res.status(201).json(user);
+    };
 };

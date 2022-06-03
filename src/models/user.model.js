@@ -29,23 +29,21 @@ User.create = function(newUser, result) {
 };
 
 // Get user by email
-User.check = function(email, result) {
+User.check = function(user, result) {
     // query for get
-    const getQuery = "SELECT * FROM users WHERE email=?"
+    const getQuery = "SELECT * FROM users WHERE email = ? "
 
     // get user email
-    // const email = "'" + user.email + "'";
-    console.log(email);
+    const email = user.email
+    // console.log(email);
 
     // Do the query
     dbConnection.query(getQuery, email, function (err, res) {
         // If there are no user with this email address
-        if (err) {
-            result(err, null);
+        // console.log(res);
+        if (!res) {
+            result(null, res);
         }
-
-        console.log("res", res);
-        result(null, res);
     });
 };
 
