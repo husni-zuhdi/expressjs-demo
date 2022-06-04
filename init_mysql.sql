@@ -1,5 +1,7 @@
 -- mysql implementation
 CREATE DATABASE expressjs_demo_db;
+SET GLOBAL time_zone = '+7:00';
+
 USE expressjs_demo_db;
 
 CREATE TABLE IF NOT EXISTS `employees` (
@@ -27,8 +29,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` VARCHAR(255) NOT NULL,
   `password`VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`)) ENGINE = InnoDB;
-INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`) VALUES ('John', 'Doe', 'johndoe@gmail.com', 'password');
-INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`) VALUES ('Husni', 'Zuhdi', 'husnizuhdi@gmail.com', 'pas$w0rd');
+INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`) VALUES ('husni', 'zuhdi', 'husnizuhdi@bangkit', '$2a$10$65knUXoJWgrHHrLP/i4PxubDXzhsXn1mkFiUCF3w8qUrqHX/OGQhG');
 
 -- postgresql implementation
 -- CREATE DATABASE expressjs_demo_db;
