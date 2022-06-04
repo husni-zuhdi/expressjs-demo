@@ -1,7 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// Test auth
-const auth = require('./src/controllers/auth') 
 
 // create express app
 const app = express();
@@ -17,14 +15,6 @@ app.get('/', (req, res) => {
     res.status(200).json({
         "error": false,
         "message": "Hello all 👋. This is demo for CC-25"
-    });
-});
-
-// Test auth
-app.get('/welcome', auth, (req, res) => {
-    res.status(200).json({
-        "error": false,
-        "message": "Hello all 👋. The auth is works!"
     });
 });
 
