@@ -10,16 +10,28 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `last_name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `phone` VARCHAR(50) NOT NULL,
-  `organization` VARCHAR(255) NOT NULL,
+  `department` VARCHAR(255) NOT NULL,
   `designation` VARCHAR(100) NOT NULL,
-  `salary` DECIMAL(11,2) UNSIGNED DEFAULT 0.00,
-  `status` TINYINT UNSIGNED DEFAULT 0,
-  `is_deleted` TINYINT UNSIGNED DEFAULT 0,
+  `satisfaction_level` DECIMAL(11,2) UNSIGNED DEFAULT 0.50 NOT NULL,
+  `last_evaluation` DECIMAL(11,2) UNSIGNED DEFAULT 0.50 NOT NULL,
+  `number_project` INT NOT NULL,
+  `average_montly_hours` INT NOT NULL,
+  `time_spend_company` INT NOT NULL,
+  `work_accident` INT NOT NULL,
+  `left` BOOLEAN NOT NULL,
+  `promotion_last_5years` BOOLEAN NOT NULL,
+  `salary_level` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)) ENGINE = InnoDB;
-INSERT INTO `employees` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('John', 'Doe', 'johndoe@gmail.com', '1234567890', 'BR Softech Pvt Ltd', 'Full Stack Developer', '500.00', '1', '0', '2019-11-19 03:30:30');
-INSERT INTO `employees` (`first_name`, `last_name`, `email`, `phone`, `organization`, `designation`, `salary`, `status`, `is_deleted`, `created_at`) VALUES ('Husni', 'Zuhdi', 'husnizuhdi@gmail.com', '0987654321', 'PT Random Sejati', 'Cloud Engineer', '500.00', '1', '0', '2019-11-19 03:30:30');
+INSERT INTO `employees` (
+  `first_name`, `last_name`, `email`, `phone`, `department`, `designation`, `satisfaction_level`, `last_evaluation`, `number_project`, `average_montly_hours`, `time_spend_company`, `work_accident`, `left`, `promotion_last_5years`, `salary_level`, `created_at`
+  ) VALUES (
+  'John', 'Doe', 'johndoe@gmail.com', '1234567890', 'IT', 'Full Stack Developer', '0.75', '0.80', '4', '250', '4', '0', '0', '0', 'high', '2019-11-19 03:30:30');
+INSERT INTO `employees` (
+  `first_name`, `last_name`, `email`, `phone`, `department`, `designation`, `satisfaction_level`, `last_evaluation`, `number_project`, `average_montly_hours`, `time_spend_company`, `work_accident`, `left`, `promotion_last_5years`, `salary_level`, `created_at`
+  ) VALUES (
+  'Husni', 'Zuhdi', 'husnizuhdi@gmail.com', '0987654321', 'IT', 'Cloud Engineer', '0.75', '0.81', '2', '250', '4', '0', '0', '0', 'medium', '2019-11-19 03:30:30');
 
 
 CREATE TABLE IF NOT EXISTS `users` (
