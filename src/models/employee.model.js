@@ -8,10 +8,18 @@ var Employee = function(employee) {
     this.last_name = employee.last_name;
     this.email = employee.email;
     this.phone = employee.phone;
-    this.organization = employee.organization;
+    this.department = employee.department;
     this.designation = employee.designation;
-    this.salary = employee.salary;
-    this.status = employee.status;
+    this.satisfaction_level = employee.satisfaction_level;
+    this.last_evaluation = employee.last_evaluation;
+    this.number_project = employee.number_project;
+    this.average_montly_hours = employee.average_montly_hours;
+    this.time_spend_company = employee.time_spend_company;
+    this.work_accident = employee.work_accident;
+    this.left = employee.left;
+    this.promotion_last_5years = employee.promotion_last_5years;
+    this.salary_level = employee.salary_level;
+    this.will_resign = employee.will_resign;
     this.created_at = new Date();
     this.updated_at = new Date();
 };
@@ -30,7 +38,7 @@ Employee.create = function(newEmployee, result) {
         }
         
         // If not, show the insertId
-        console.log(res.insertId);
+        console.log("id", res.insertId);
         result(null, res.insertId);
     });
 };
@@ -68,7 +76,7 @@ Employee.getAll = function(result) {
         }
 
         // If not, serve the employee data
-        console.log("employees", res)
+        console.log("employees", res);
         result(null, res);
     });
 };
@@ -82,9 +90,18 @@ Employee.update = function(id, employee, result) {
         last_name=?,
         email=?,
         phone=?,
-        organization=?,
+        department=?,
         designation=?,
-        salary=?
+        satisfaction_level=?,
+        last_evaluation=?,
+        number_project=?,
+        average_montly_hours=?,
+        time_spend_company=?,
+        work_accident=?,
+        left=?,
+        promotion_last_5years=?,
+        salary_level=?,
+        will_resign=?,
     WHERE id = ?
     `
 
@@ -94,9 +111,18 @@ Employee.update = function(id, employee, result) {
         employee.last_name,
         employee.email,
         employee.phone,
-        employee.organization,
+        employee.department,
         employee.designation,
-        employee.salary,
+        employee.satisfaction_level,
+        employee.last_evaluation,
+        employee.number_project,
+        employee.average_montly_hours,
+        employee.time_spend_company,
+        employee.work_accident,
+        employee.left,
+        employee.promotion_last_5years,
+        employee.salary_level,
+        employee.will_resign,
         id
     ]
 
@@ -109,6 +135,7 @@ Employee.update = function(id, employee, result) {
         }
 
         // If not, update employee data
+        console.log("employee", res);
         result(null, res);
     });
 };

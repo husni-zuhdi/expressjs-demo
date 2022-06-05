@@ -5,14 +5,18 @@ const Employee = require("../models/employee.model");
 // Handle get all employees
 exports.getAll = function(req, res) {
     Employee.getAll(function(err, employees) {
-        console.log("controller");
-
         if(err) {
-            res.send(err);
+            res.status(404).json({
+                error: true,
+                log: err
+            });
         }
 
-        console.log("res", employees);
-        res.send(employees)
+        res.status(200).json({
+            error: false,
+            message: "👨‍💼👩‍💼 Here are your employees data",
+            data: employees
+        });
     });
 };
 
@@ -32,7 +36,7 @@ exports.create = function(req, res) {
     Employee.create(newEmployee, function(err, employee) {
         if(err) {
             res.send(err);
-        }
+        };
 
         res.json({
             error: false,
@@ -46,10 +50,17 @@ exports.create = function(req, res) {
 exports.getById = function(req, res) {
     Employee.getById(req.params.id, function(err, employee) {
         if(err) {
-            res.send(err);
+            res.status(404).json({
+                error: true,
+                log: err
+            });
         }
 
-        res.json(employee);
+        res.status(200).json({
+            error: false,
+            message: "👨‍💼👩‍💼 Here are your employees data",
+            data: employee
+        });
     });
 };
 
