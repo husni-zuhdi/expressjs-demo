@@ -42,7 +42,7 @@
 ## ☁️ How to use in Cloud
 
 ### ⚡️ Deploy MySQL Database in Compute Engine
-1. Use this [link](https://console.cloud.google.com/marketplace/product/click-to-deploy-images/mysql) to deply Virtual Machine with MySQL automatically installed
+1. Use this [link](https://console.cloud.google.com/marketplace/product/click-to-deploy-images/mysql) to deploy Virtual Machine with MySQL automatically installed
 2. Click **Launch** and **Enable API Needed**
 3. In Deployment page, setup your Virtual Machine
 4. Make sure to checklist `Allow TCP port ...` so you can test your database from local
