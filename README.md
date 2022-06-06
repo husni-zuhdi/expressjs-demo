@@ -1,5 +1,8 @@
 # Express.js Demo for CC-25
-> Part of Bangkit 2022 🇮🇩🇮🇩🇮🇩
+> 🇮🇩 Part of Bangkit 2022
+
+> 🛑 Please use it wisely! Remeber Bangkit 2022 Code of Conduct!
+**Use it as reference only!**
 
 ## Stack used
 1. 🟨 Express.js Web Framework
