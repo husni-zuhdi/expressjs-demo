@@ -1,5 +1,8 @@
 # Express.js Demo for CC-25
-> Part of Bangkit 2022 🇮🇩🇮🇩🇮🇩
+> 🇮🇩 Part of Bangkit 2022
+
+> 🛑 Please use it wisely! Remeber Bangkit 2022 Code of Conduct!
+**Use it as reference only!**
 
 ## Stack used
 1. 🟨 Express.js Web Framework
@@ -42,7 +45,7 @@
 ## ☁️ How to use in Cloud
 
 ### ⚡️ Deploy MySQL Database in Compute Engine
-1. Use this [link](https://console.cloud.google.com/marketplace/product/click-to-deploy-images/mysql) to deply Virtual Machine with MySQL automatically installed
+1. Use this [link](https://console.cloud.google.com/marketplace/product/click-to-deploy-images/mysql) to deploy Virtual Machine with MySQL automatically installed
 2. Click **Launch** and **Enable API Needed**
 3. In Deployment page, setup your Virtual Machine
 4. Make sure to checklist `Allow TCP port ...` so you can test your database from local
