@@ -1,6 +1,8 @@
 'use strict';
 
 var dbConnection = require('../../config/db.config');
+var request = require('request');
+const { json } = require('express/lib/response');
 
 //Create object/schema(?) employee
 var Employee = function(employee) {
@@ -24,11 +26,74 @@ var Employee = function(employee) {
     this.updated_at = new Date();
 };
 
+// Under development
+// function doRequest(url, instance) {
+//     return new Promise(function (resolve, reject) {
+//         request({
+//             url: url, //URL to hit
+//             method: 'POST', // specify the request type
+//             json: instance //Set the body as a json
+//         }, function (error, res, body) {
+//         if (!error && res.statusCode == 200) {
+//             resolve(body.left);
+//         } else {
+//             reject(error);
+//         }
+//     });
+// });
+// }
+
 // Create Employee
-Employee.create = function(newEmployee, result) {
+Employee.create =  async (newEmployee, result) => {
     // query for create
     const createQuery = "INSERT INTO employees SET ?"
+
+    const instance = {
+        "satisfaction_level": newEmployee.satisfaction_level,
+        "last_evaluation": newEmployee.last_evaluation,
+        "number_project": newEmployee.number_project,
+        "average_montly_hours": newEmployee.average_montly_hours,
+        "time_spend_company": newEmployee.time_spend_company,
+        "work_accident": newEmployee.work_accident,
+        "promotion_last_5years": newEmployee.promotion_last_5years,
+        "department": newEmployee.department,
+        "salary_level": newEmployee.salary_level,
+    };
+    console.log("url", process.env.ML_API_ENDPOINT)
+    console.log("instance", instance)
+
+    // Under development
+    //Lets configure and request
+    // async function predict() {
+    //     var url = String(process.env.ML_API_ENDPOINT)
+    //     let res = await doRequest(url, instance);
+    //     console.log(res);
+    // };
+    // const pred = predict();
+    // console.log("pred", pred)
+
+    request({
+        url: String(process.env.ML_API_ENDPOINT), //URL to hit
+        method: 'POST', // specify the request type
+        // headers: { // speciyfy the headers
+        //     'Content-Type': 'application/json',
+        // },
+        json: instance //Set the body as a string
+    }, function(error, response, body){
+        if(error) {
+            console.log(error);
+        } else {
+            console.log(response.statusCode, body);
+            var predict = Number(body.left);
+            newEmployee.left = predict;
+        };
+    });
     
+    // console.log("before", newEmployee);
+    // Wait for the prediction is complete
+    await new Promise(r => setTimeout(r, 15000));
+    // console.log("after", newEmployee);
+
     // Do the query
     dbConnection.query(createQuery, newEmployee, function(err, res) {
         // If error, show it
