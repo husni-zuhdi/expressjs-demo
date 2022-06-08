@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
     res.status(200).json({
         "error": false,
-        "message": "Hello all 👋. This is demo for CC-25"
+        "message": "Hello all 👋. This is demo for CC-25 and teams"
     });
 });
 
