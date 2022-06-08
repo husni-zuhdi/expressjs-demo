@@ -18,7 +18,7 @@ exports.register = async (req, res) => {
     };
 
     // Check if user is already registered in our service
-    User.check(req.body, function(err, user) {
+    User.check(req.body.email, function(err, user) {
         if(!user) {
             console.log("err and user", err, user)
             res.status(409).json({
@@ -111,7 +111,7 @@ exports.login = async (req, res) => {
                 // Assign token to user
                 user[0].token = token;
 
-                res.status(201).json(user);
+                res.status(201).json(user[0]);
             } else {
               // response is OutgoingMessage object that server response http request
               return res.status(403).json({

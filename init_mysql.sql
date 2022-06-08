@@ -18,10 +18,9 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `average_montly_hours` INT NOT NULL,
   `time_spend_company` INT NOT NULL,
   `work_accident` INT NOT NULL,
-  `left` BOOLEAN NOT NULL,
+  `left` BOOLEAN DEFAULT FALSE,
   `promotion_last_5years` BOOLEAN NOT NULL,
   `salary_level` VARCHAR(255) NOT NULL,
-  `will_resign` BOOLEAN DEFAULT FALSE,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)) ENGINE = InnoDB;
