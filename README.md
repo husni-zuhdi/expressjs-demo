@@ -24,13 +24,14 @@
 2. Run `npm install`
 3. Create `.env` file in root folder with this specifications
 
-| Variables             | Function                | Example       |
-| --------------------- |:-----------------------:| -------------:|
-| PORT                  | your_API_port           | 8080          |
-| TOKEN_KEY             | your_bcrypt_auth_token  | YVTiYss7HOU=  |
-| MYSQL_ROOT_USER       | your_mysql_root_user    | root          |
-| MYSQL_ROOT_PASSWORD   | your_mysql_root_pass    | passw0rd      |
-| MYSQL_HOST            | your_mysql_host_address | 0.0.0.0       |
+| Variables             | Function                       | Example                  |
+| --------------------- |:------------------------------:| ------------------------:|
+| PORT                  | your_API_port                  | 8080                     |
+| TOKEN_KEY             | your_bcrypt_auth_token         | YVTiYss7HOU=             |
+| MYSQL_ROOT_USER       | your_mysql_root_user           | root                     |
+| MYSQL_ROOT_PASSWORD   | your_mysql_root_pass           | passw0rd                 |
+| MYSQL_HOST            | your_mysql_host_address        | 0.0.0.0                  |
+| ML_API_ENDPOINT       | your_machine_learning_endpoint | `https://endpoint.com`   |
 
 4. Run `docker run --name expressjs-demo-mysql -e MYSQL_ROOT_PASSWORD=passw0rd -p 0.0.0.0:3306:3306 -d mysql:8.0`
 5. Run `docker exec -it expressjs-demo-mysql bash`
